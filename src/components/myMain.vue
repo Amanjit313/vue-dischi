@@ -1,11 +1,17 @@
 <template>
-  <div>
-    MAIN
-  </div>
+  <main>
+    <div class="w-70">
+      <myCards 
+      v-for="(music, index) in musics" 
+      :key="`music-${index}`" 
+      :myCardsItem="music"/>
+    </div>
+  </main>
 </template>
 
 <script>
 import axios from "axios";
+import myCards from "./myCards.vue"
 
 export default {
   name: "myMain",
@@ -17,7 +23,7 @@ export default {
     }
   },
   components: {
-  
+    myCards,
   },
   
   mounted(){
@@ -28,7 +34,8 @@ export default {
     getAPI(){
      axios.get(this.dataURL)
      .then(r => {
-        this.musics = r.data;
+        this.musics = r.data.response;
+        console.log(this.musics.response)
         this.isLoaded = true
      })
     }
@@ -36,6 +43,16 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+main{
+  background-color: #1E2D3B;
+}
+
+div{
+  display: flex;
+  flex-basis: 20%;
+  flex-wrap: wrap;
+}
 
 </style>
