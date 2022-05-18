@@ -1,9 +1,9 @@
 <template>
   <main>
-    <mySelector class="mySelector" />
+    <mySelector class="mySelector" @search="cardToSearch" />
     <div class="w-70">
       <myCards 
-      v-for="(music, index) in musics" 
+      v-for="(music, index) in filterCards" 
       :key="`music-${index}`" 
       :myCardsItem="music"/>
     </div>
@@ -22,6 +22,7 @@ export default {
     return{
       dataURL: "https://flynn.boolean.careers/exercises/api/array/music",
       musics: [],
+      cardGenreSearch: "",
       isLoaded: false
     }
   },
@@ -43,9 +44,31 @@ export default {
         console.log(this.musics.response)
         this.isLoaded = true
      })
+    },
+
+    cardToSearch(cardsOptions){
+      console.log(cardsOptions);
+      this.cardGenreSearch = cardsOptions
+    }
+  },
+
+  computed:{
+    filterCards(){
+      let cardArray = [];
+
+      if(this.cardGenreSearch === "Seleziona un genere"){
+        cardArray = this.musics
+      } else {
+        cardArray = this.musics.filter(cards => {
+          return cards.genre.includes(this.cardGenreSearch)
+        })
+      }
+
+      return cardArray;
     }
   }
-}
+
+}  
 </script>
 
 <style lang="scss" scoped>

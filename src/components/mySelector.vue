@@ -7,12 +7,12 @@
 
     <div class="selector">
       <div class="select">
-        <select>
-          <option>Seleziona un genere</option>
-          <option>Rock</option>
-          <option>Pop</option>
-          <option>Jazz</option>
-          <option>Metal</option>
+        <select v-model="cardSearch" @change="$emit('search', cardSearch)">
+          <option value="Seleziona un genere">Seleziona un genere</option>
+          <option value="Rock">Rock</option>
+          <option value="Pop">Pop</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Metal">Metal</option>
         </select>
       </div>
     </div>
@@ -22,8 +22,14 @@
 
 <script>
 export default {
-  name: "mySelector"
+  name: "mySelector",
+  data(){
+    return{
+      cardSearch: "Seleziona un genere"
+    }
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>
