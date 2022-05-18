@@ -1,5 +1,6 @@
 <template>
   <main>
+    <mySelector class="mySelector" />
     <div class="w-70">
       <myCards 
       v-for="(music, index) in musics" 
@@ -12,9 +13,11 @@
 <script>
 import axios from "axios";
 import myCards from "./myCards.vue"
+import mySelector from './mySelector.vue';
 
 export default {
   name: "myMain",
+
   data(){
     return{
       dataURL: "https://flynn.boolean.careers/exercises/api/array/music",
@@ -22,8 +25,10 @@ export default {
       isLoaded: false
     }
   },
+
   components: {
     myCards,
+    mySelector
   },
   
   mounted(){
@@ -47,6 +52,13 @@ export default {
 
 main{
   background-color: #1E2D3B;
+  min-height: 100vh;
+}
+
+.mySelector{
+  min-height: 10vh;
+  background-color: #2E3A46;
+  margin-bottom: 50px;
 }
 
 div{
